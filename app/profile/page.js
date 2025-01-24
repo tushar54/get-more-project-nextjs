@@ -1,23 +1,22 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from 'next/navigation';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
 export default async function ProfilePage() {
-  const { getUser } = getKindeServerSession(); // Get the session
-  const user = await getUser(); // Retrieve the authenticated user details
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
-  // If no user exists, redirect to login (on server-side)
+  // Redirect to login page if the user is not authenticated
   if (!user) {
-    return {
-      redirect: {
-        destination: '/api/auth/login', // Redirect to login page
-        permanent: false,
-      },
-    };
+    redirect('/api/auth/login');
   }
 
-  // Render the profile page for authenticated users
+  // If user exists, render the profile page
   return (
-    <div className="text-center mt-10">
-      <h1 className="text-3xl font-bold">Hi {user.given_name}, Welcome to your Profile!</h1>
+    <div>
+      <h1>Welcome to your profile, {user.given_name || 'User'}!</h1>
     </div>
   );
 }
+
+// Ensure this page is not statically generated
+export const dynamic = 'force-dynamic';
