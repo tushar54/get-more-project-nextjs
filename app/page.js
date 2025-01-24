@@ -7,9 +7,9 @@ const Page = async () => {
 
 
   return (
-    <div className="pl-10 text-3xl grid lg:grid-cols-4 md:grid-cols-3 gap-4 justify-center items-center rounded-md ">
+    <div className="pl-10 text-2xl grid lg:grid-cols-4 md:grid-cols-3 gap-5 justify-center items-center rounded-md ">
       {data.map((item) => (
-        <div key={item.id} className=' flex flex-col justify-between items-center border-2 w-[300px] h-[200px] text-center'>
+        <div key={item.id} className=' flex flex-col justify-between items-center border-2 md:w-[220px] w-[300px] h-[200px] text-center'>
           <h1>{item.title}</h1>
           <Link href={`/${item.id}`}>
             <button className="text-blue-500 underline">Details</button>
